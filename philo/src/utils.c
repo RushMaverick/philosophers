@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrask <rrask@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 15:11:24 by tspoof            #+#    #+#             */
-/*   Updated: 2023/07/16 13:08:42 by rrask            ###   ########.fr       */
+/*   Updated: 2023/07/31 15:16:26 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,36 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+static int	ft_isdigit(int c)
+{
+	if ((c >= '0' && c <= '9'))
+		return (1);
+	return (0);
+}
+
 int	ft_atoi(const char *str)
 {
-	int				i;
-	int				sign;
-	unsigned long	val;
+	long	res;
+	int		sign;
 
+	res = 0;
 	sign = 1;
-	val = 0;
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == '-')
-		sign = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9' && str[i] != '\n')
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '+' || *str == '-')
 	{
-		val = val * 10 + (str[i] - '0');
-		if (sign == 1 && val > 9223372036854775807)
-			return (-1);
-		if (sign == -1 && val > 9223372036854775807)
-			return (0);
-		i++;
+		if (*str == '-')
+			sign = -1;
+		str++;
 	}
-	return ((int)(sign * val));
+	while (ft_isdigit(*str))
+	{
+		res = res * 10 + *str - '0';
+		if (res * sign > RAS_MAX)
+			return (-1);
+		else if (res * sign < RAS_MIN)
+			return (0);
+		str++;
+	}
+	return ((int)res * sign);
 }

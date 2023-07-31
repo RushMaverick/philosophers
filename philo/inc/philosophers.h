@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tspoof <tspoof@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 21:09:28 by rrask             #+#    #+#             */
-/*   Updated: 2023/07/11 14:41:54 by tspoof           ###   ########.fr       */
+/*   Updated: 2023/07/31 15:16:33 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PHILOSOPHERS_H
 # include <pthread.h>
@@ -16,6 +17,8 @@
 # include <sys/time.h>
 # include <unistd.h>
 # define PHILOSOPHERS_H
+# define RAS_MAX 2147483647
+# define RAS_MIN -2147483648
 # define ARG_MIN 5
 # define ARG_MAX 6
 # define MAX_PHILO 250
@@ -24,9 +27,9 @@ typedef struct s_attr
 {
 	size_t			start_time;
 	int				philo_num;
-	size_t			time_to_die;
-	size_t			time_to_eat;
-	size_t			time_to_sleep;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
 	int				times_must_eat;
 }					t_attr;
 
