@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 09:51:23 by rrask             #+#    #+#             */
-/*   Updated: 2023/07/22 13:54:55 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/01 17:09:59 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int	main(int argc, char **argv)
 	}
 	if (attr_set(&attributes, argc, argv))
 		return (2);
+	if (attributes.philo_num > 200)
+	{
+		error_handler("Too many philos.");
+		return (2);
+	}
 	if (mutex_init(attributes.philo_num, &mutex))
 		return (3);
 	philos_init(philos, &attributes, &mutex);

@@ -6,10 +6,9 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 21:09:28 by rrask             #+#    #+#             */
-/*   Updated: 2023/07/31 15:16:33 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/01 15:59:36 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PHILOSOPHERS_H
 # include <pthread.h>
@@ -21,7 +20,7 @@
 # define RAS_MIN -2147483648
 # define ARG_MIN 5
 # define ARG_MAX 6
-# define MAX_PHILO 250
+# define MAX_PHILO 200
 
 typedef struct s_attr
 {

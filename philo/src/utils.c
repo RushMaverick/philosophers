@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 15:11:24 by tspoof            #+#    #+#             */
-/*   Updated: 2023/07/31 15:16:26 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/01 17:33:02 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,20 @@ static int	ft_isdigit(int c)
 int	ft_atoi(const char *str)
 {
 	long	res;
-	int		sign;
 
 	res = 0;
-	sign = 1;
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
-	if (*str == '+' || *str == '-')
+	while (*str)
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (ft_isdigit(*str))
-	{
+		if (ft_isdigit(*str) == 0)
+			return (0);
 		res = res * 10 + *str - '0';
-		if (res * sign > RAS_MAX)
+		if (res > RAS_MAX)
 			return (-1);
-		else if (res * sign < RAS_MIN)
+		else if (res < RAS_MIN)
 			return (0);
 		str++;
 	}
-	return ((int)res * sign);
+	return ((int)res);
 }

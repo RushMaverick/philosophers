@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:19:57 by rrask             #+#    #+#             */
-/*   Updated: 2023/07/22 13:54:59 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/01 17:32:21 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,16 @@ static int	mutex_array_init(int num_philos, pthread_mutex_t *mutexes)
 	while (i < num_philos)
 	{
 		if (pthread_mutex_init(mutexes + i, NULL) != 0)
+		{
+			i--;
+			while (i >= 0)
+			{
+				if (pthread_mutex_destroy(mutexes + i) != 0)
+					return (1);
+				i++;
+			}
 			return (1);
+		}
 		i++;
 	}
 	return (0);

@@ -1,15 +1,16 @@
 NAME 		= philo
 
-S			= src/
-O			= obj/
+S			= src
+O			= obj
+INCLUDES = inc
 
-OBJ			= $(SRC:$S%=$O%.o)
-
-INCLUDES = -Iinc
-CFLAGS = -Wall -Wextra -Werror -O3 -pthread
 SRC = \
 $S/main.c		$S/mutex.c			$S/errors.c			$S/utils.c		$S/philo.c		\
 $S/governor.c	$S/philo_actions.c	$S/philo_utils.c	$S/attr.c		$S/printing.c
+OBJ			= $(patsubst $S/%,$O/%,$(SRC:.c=.o))
+
+HEADER = inc/philosophers.h
+CFLAGS = -Wall -Wextra -Werror -pthread -O3
 
 ####
 
@@ -17,16 +18,14 @@ $S/governor.c	$S/philo_actions.c	$S/philo_utils.c	$S/attr.c		$S/printing.c
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	cc $(CFLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJ) $(HEADER)
+	cc $(CFLAGS) -I$(INCLUDES) $(OBJ) -o $(NAME)
 
 $O:
 	@mkdir $@
 
-$(OBJ): | $O
-
-$(OBJ): $O%.o: $S%
-	cc $(CFLAGS) $(INCLUDES) -c $< -o $@
+$O/%.o: $S/%.c $(HEADER) | $O
+	cc $(CFLAGS) -I$(INCLUDES) -c $< -o $@
 
 clean:
 	rm -rf $O

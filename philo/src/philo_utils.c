@@ -6,7 +6,7 @@
 /*   By: rrask <rrask@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:59:08 by tspoof            #+#    #+#             */
-/*   Updated: 2023/07/22 13:55:06 by rrask            ###   ########.fr       */
+/*   Updated: 2023/08/01 17:32:51 by rrask            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	philos_spawn(t_philo *philos, pthread_mutex_t *gate)
 {
 	int	i;
 
-	(void)gate;
 	i = 0;
 	pthread_mutex_lock(gate);
 	while (i < philos->attr->philo_num)
